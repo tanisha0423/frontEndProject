@@ -1,484 +1,218 @@
-
 body {
-    margin: 0;
-    padding: 0;
-    background: linear-gradient( #4729ab, #3d2e4f, #231e32);
-    font-family: 'Georgia', serif;
-    color: #fff;
-  }
-  
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(180deg, #121212, #200f27, #020103); /* Mild dark gradient */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-y: auto; /* Allow scrolling */
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+/* Navbar */
 .navbar {
-    background: #000;
-    padding:10px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  }
-  
-  .navbar ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .navbar li {
-    margin: 0 15px;
-  }
-  
-  .navbar a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 1.1rem;
-    font-family: 'Georgia', serif;
-    position: relative;
-    padding: 5px 0;
-    transition: color 0.3s ease;
-  }
-  
-  .navbar a:before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    background: #ffd700;
-    bottom: 0;
-    left: 0;
-    transform: scaleX(0);
-    transform-origin: bottom right;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .navbar a:hover {
-    color: #ffd700;
-  }
-  
-  .navbar a:hover:before {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
-  
-  /* Zodiac Gallery Styles */
-  .gallery {
-    text-align: center;
-    background-color: #121212; /* Dark background for contrast */
-    padding: 50px 0;
-  }
-  
-  .title {
-    font-size: 2rem;
-    color: #fff;
-    font-family: 'Georgia', serif;
-    margin-bottom: 10px;
-  }
-  
-  .subtitle {
-    font-size: 1.2rem;
-    color: #fff;
-    margin-bottom: 30px;
-  }
-  
+  background: #000;
+  padding: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li {
+  margin: 0 15px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.1rem;
+  font-family: 'Georgia', serif;
+  padding: 10px 15px;
+  background-color: #8e44ad;
+  border-radius: 8px;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.navbar a:hover {
+  background-color: #732d91;
+  color: #ffd700;
+  box-shadow: 0 0 10px #ffd700, 0 0 20px #732d91;
+}
+
+.navbar a::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: #ffd700;
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar a:hover::before {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Zodiac Gallery */
+.gallery {
+  text-align: center;
+  padding: 50px 0;
+  flex-grow: 1;
+  background: transparent;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.title {
+  font-size: 2rem;
+  color: #fff;
+  font-family: 'Georgia', serif;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+/* Zodiac Container */
+.zodiac-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  overflow-x: auto;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+.zodiac-card {
+  width: calc(16.66% - 15px);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid #ffd700;
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, opacity 0.3s ease-in-out;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
+  text-decoration: none;
+  backdrop-filter: blur(5px);
+  opacity: 0.85;
+}
+
+.zodiac-card h2, .zodiac-card p {
+  color: white;
+}
+
+.zodiac-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease, opacity 0.3s ease-in-out;
+  background-color: #000;
+}
+
+.zodiac-card:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), 0 0 30px rgba(255, 215, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.08);
+  opacity: 1;
+}
+
+.zodiac-card:hover img {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #f3d7ff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s ease, transform 0.2s ease;
+  backdrop-filter: blur(5px);
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffd700;
+  box-shadow: 0 0 10px #ffd700;
+  transform: translateY(-2px);
+}
+
+/* Extra Button Class */
+.buttontrial {
+  background-color: #4729ab;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1600px) and (min-width: 992px) {
   .zodiac-container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
+    gap: 10px;
     flex-wrap: wrap;
   }
-  
-  /* Zodiac Card Styles */
+
   .zodiac-card {
-    width: 180px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1.5px solid #ffd700;
-    border-radius: 16px;
-    padding: 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
-    text-decoration: none; /* Ensure no underline for the link */
+    width: calc(16.66% - 15px);
+    margin-bottom: 15px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
   }
-  
-  .zodiac-card h2, .zodiac-card p {
-    color: white; /* Make zodiac name and dates white */
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+  .zodiac-card {
+    width: calc(33.33% - 15px);
+    margin-bottom: 15px;
   }
-  
-  .zodiac-card:hover {
-    transform: scale(1.05);
+}
+
+@media (max-width: 767px) {
+  .zodiac-card {
+    width: calc(50% - 15px);
+    margin-bottom: 15px;
   }
-  
-  .zodiac-card img {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    margin-bottom: 10px;
+}
+
+@media (max-width: 480px) {
+  /* Single column of cards */
+  .zodiac-card {
+    width: 100%; /* 1 card per row */
+    margin-bottom: 15px;
   }
-
-  body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(180deg, #391055, #a06cd5, #391055);
-    color: #f0e6f6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
-
-.quiz-container {
-    background-color: #1f2c3e;
-    max-width: 90%;
-    width: 700px;
-    padding: 3.5rem;
-    border-radius: 16px;
-    box-shadow: 0 0 25px rgba(160, 108, 213, 0.45);
-    height: 450px;
-    overflow-y: auto;
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: #a06cd5;
-}
-
-label {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-    display: block;
-}
-
-input[type="date"] {
-    background-color: #2e3e55;
-    color: #e2cfea;
-    padding: 0.5rem;
-    border: none;
-    border-radius: 8px;
-    width: 100%;
-    margin-bottom: 1rem;
-}
-
-.radio-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin: 1rem 0;
-    width: 100%;
-}
-
-.radio-label {
-    background-color: #3b3a58;
-    padding: 0.75rem 1.5rem;
-    border-radius: 10px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
-    transition: background-color 0.3s ease;
-}
-
-.radio-label:hover {
-    background-color: #6247aa;
-}
-
-input[type="radio"] {
-    accent-color: #a06cd5;
-}
-
-.quiz-buttons {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1.5rem;
-}
-
-button {
-    color: #8e44ad;
-
-    height:40px;
-    padding: 0.6rem 1.2rem;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-button:hover {
-    transform: scale(1.05);
-}
-
-.analysis {
-    text-align: center;
-    background-color: #3b3a58;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 0 15px #a06cd5;
-}
-
-.retake-button {
-    background: linear-gradient(135deg, #6247aa, #a06cd5);
-    color: #fff;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    font-size: 1rem;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    margin-top: 1.5rem;
-    display: block;
-    width: 100%;
-    text-align: center;
-}
-
-.retake-button:hover {
-    transform: scale(1.05);
-}
-
-.bottom-nav {
-    position: absolute;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-  }
-  
-  
-  .nav-link {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #f3d7ff;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 12px;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: background-color 0.3s ease;
-  }
-  
-  .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-  }
-  
-  .quiz-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-  }
-
-  .quiz-buttons button {
-    padding: 10px 20px;
-    border-radius: 8px;
-    background-color: #8e44ad;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .quiz-buttons button:hover {
-    background-color: #732d91;
-  }
-  
-  .quiz-container {
-    background-color: #000; /* pure black */
-    max-width: 90%;
-    width: 700px;
-    height: 480px; /* constant height */
-    padding: 3rem;
-    border-radius: 16px;
-    box-shadow: 0 0 25px rgba(160, 108, 213, 0.45);
-    color: #f0e6f6;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden;
-    position: relative;
-}
-
-.question-slide {
-    position: absolute;
-    transition: all 0.5s ease-in-out;
-    width: 100%;
-    opacity: 0;
-    transform: translateX(100%);
-}
-
-.question-slide.active {
-    opacity: 1;
-    transform: translateX(0);
-    position: relative;
-}
-
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(180deg, #391055, #a06cd5, #391055);
-    color: #f0e6f6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.quiz-container {
-    background-color: #1f2c3e;
-    max-width: 90%;
-    width: 700px;
-    padding: 3.5rem;
-    border-radius: 16px;
-    box-shadow: 0 0 25px rgba(160, 108, 213, 0.45);
-    height: 450px;
-    overflow-y: auto;
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: #a06cd5;
-}
-
-label {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-    display: block;
-}
-
-input[type="date"] {
-    background-color: #2e3e55;
-    color: #e2cfea;
-    padding: 0.5rem;
-    border: none;
-    border-radius: 8px;
-    width: 100%;
-    margin-bottom: 1rem;
-}
-
-.radio-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin: 1rem 0;
-    width: 100%;
-}
-
-.radio-label {
-    background-color: #3b3a58;
-    padding: 0.75rem 1.5rem;
-    border-radius: 10px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
-    transition: background-color 0.3s ease;
-}
-
-.radio-label:hover {
-    background-color: #6247aa;
-}
-
-input[type="radio"] {
-    accent-color: #a06cd5;
-}
-
-.quiz-buttons {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1.5rem;
-}
-
-button {
-    background: linear-gradient(180deg, #6247aa, #a06cd5);
-    color: #fff;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    font-size: 1rem;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-button:hover {
-    transform: scale(1.05);
-}
-
-.analysis {
-    text-align: center;
-    background-color: #3b3a58;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 0 15px #a06cd5;
-}
-
-.retake-button {
-    background: linear-gradient(135deg, #6247aa, #a06cd5);
-    color: #fff;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    font-size: 1rem;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    margin-top: 1.5rem;
-    display: block;
-    width: 100%;
-    text-align: center;
-}
-
-.retake-button:hover {
-    transform: scale(1.05);
-}
-
-.bottom-nav {
-    position: absolute;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-  }
-  
-  
-  .nav-link {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #f3d7ff;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 12px;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: background-color 0.3s ease;
-  }
-  
-  .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-  }
-  
-  .quiz-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-  }
-
-  .quiz-buttons button {
-    padding: 10px 20px;
-    border-radius: 8px;
-    background-color: #8e44ad;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .quiz-buttons button:hover {
-    background-color: #732d91;
-  }
-  

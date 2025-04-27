@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Gallery.css';
+import './Quiz.css';  // Add this import for quiz-specific styles
 
 const zodiacs = [
   { name: "Aries", src: "images/Aries.webp", date: "Mar 21 – Apr 19", link: "https://www.vogue.in/content/aries-horoscope-today-april-24-2025" },
@@ -29,6 +30,7 @@ export default function ZodiacApp() {
   const [formData, setFormData] = useState({});
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showQuiz, setShowQuiz] = useState(false);
+  const [revealAnalysis, setRevealAnalysis] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -45,6 +47,26 @@ export default function ZodiacApp() {
     if (currentQuestion > 0) {
       setCurrentQuestion(currentQuestion - 1);
     }
+  };
+
+  const handleRevealAnalysis = () => {
+    setRevealAnalysis(true);
+  };
+
+  const handleRetakeQuiz = () => {
+    // Reset all states when retaking the quiz
+    setFormData({});
+    setCurrentQuestion(0);
+    setRevealAnalysis(false);
+    setShowQuiz(true);
+  };
+
+  const handleNavigateToGallery = () => {
+    // Reset the quiz when navigating to the gallery
+    setFormData({});
+    setCurrentQuestion(0);
+    setRevealAnalysis(false);
+    setShowQuiz(false);
   };
 
   const getZodiacFromDOB = (dob) => {
@@ -66,14 +88,26 @@ export default function ZodiacApp() {
     return 'Capricorn';
   };
 
+  const getQuizZodiac = () => {
+    const strength = formData.coreStrength || '';
+    const decision = formData.decisionFlow || '';
+    if (strength === 'Patience & Grounding' && decision === 'Facts & logic') {
+      return 'Taurus'; // Example, customize as needed
+    }
+    return 'Gemini'; // Default for now
+  };
+
   return (
     <div className="zodiac-app">
       <nav className="navbar">
         <ul>
-          <li><button onClick={() => setShowQuiz(false)}>Gallery</button></li>
+          <li><button onClick={handleNavigateToGallery}>Gallery</button></li>
           <li><button onClick={() => setShowQuiz(true)}>Take Quiz</button></li>
         </ul>
       </nav>
+
+      {/* Quiz Title */}
+      <h1 className="quiz-title">Find Your Zodiac Combo</h1>
 
       {!showQuiz ? (
         <div className="gallery">
@@ -89,39 +123,69 @@ export default function ZodiacApp() {
             ))}
           </div>
         </div>
+      ) : revealAnalysis ? (
+        <div className="result">
+          <h3 className="result-title">✨ Zodiac Combo Quiz ✨</h3>
+          <h4>Your Zodiac Combo is:</h4>
+          <div className="zodiac-combo">
+            <div className="zodiac">
+              <img src={zodiacs.find(z => z.name === getZodiacFromDOB(formData.dob)).src} alt="Zodiac 1" />
+              <h5>{getZodiacFromDOB(formData.dob)}</h5>
+            </div>
+            <span>+</span>
+            <div className="zodiac">
+              <img src={zodiacs.find(z => z.name === getQuizZodiac()).src} alt="Zodiac 2" />
+              <h5>{getQuizZodiac()}</h5>
+            </div>
+          </div>
+          <div className='analysis-text'>
+            <p>Combo Personality Traits:</p>
+            <span>{Object.values(formData).slice(1).join(', ')}</span>
+            <button onClick={handleRetakeQuiz}>Take Quiz Again</button>
+          </div>
+
+        </div>
+
       ) : (
-        <div className="quiz">
+        <div className="quiz-box">
           <h2>{questions[currentQuestion].label}</h2>
-          {questions[currentQuestion].type === 'date' ? (
-            <input
-              type="date"
-              name="dob"
-              value={formData.dob || ''}
-              onChange={handleChange}
-            />
+          {currentQuestion < questions.length - 1 ? (
+            questions[currentQuestion].type === 'date' ? (
+              <input
+                type="date"
+                name="dob"
+                value={formData.dob || ''}
+                onChange={handleChange}
+              />
+            ) : (
+              questions[currentQuestion].type === 'radio' &&
+              questions[currentQuestion].options.map(option => (
+                <div key={option} className="option-box">
+                  <label>
+                    <input
+                      type="radio"
+                      name={questions[currentQuestion].name}
+                      value={option}
+                      checked={formData[questions[currentQuestion].name] === option}
+                      onChange={handleChange}
+                    />
+                    {option}
+                  </label>
+                </div>
+              ))
+            )
           ) : (
-            questions[currentQuestion].options.map(option => (
-              <label key={option}>
-                <input
-                  type="radio"
-                  name={questions[currentQuestion].name}
-                  value={option}
-                  checked={formData[questions[currentQuestion].name] === option}
-                  onChange={handleChange}
-                /> {option}
-              </label>
-            ))
+            <div className="final-question">
+              <h3>Click below to reveal your analysis!</h3>
+              <button onClick={handleRevealAnalysis}>Reveal Analysis</button>
+            </div>
           )}
+
           <div className="buttons">
             {currentQuestion > 0 && <button onClick={handleBack}>Back</button>}
             {currentQuestion < questions.length - 1 ? (
               <button onClick={handleNext}>Next</button>
-            ) : (
-              <div className="result">
-                <h3>Your Zodiac is: {getZodiacFromDOB(formData.dob)}</h3>
-                <p>Quiz Personality Traits: {Object.values(formData).slice(1).join(', ')}</p>
-              </div>
-            )}
+            ) : null}
           </div>
         </div>
       )}
