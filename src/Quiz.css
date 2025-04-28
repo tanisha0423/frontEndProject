@@ -2,11 +2,11 @@
 .quiz-box {
     background-color: #2e1a47;
     color: #f5f5f5;
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: 12px;
-    width: 380px;
-    min-height: 360px;
-    margin: 4rem auto;
+    width: 350px;
+    min-height: 320px;
+    margin: 2rem auto;
     box-shadow: 0 8px 30px rgba(255, 255, 255, 0.08);
     text-align: center;
     font-family: 'Poppins', sans-serif;
@@ -18,13 +18,13 @@
 
 /* Title Styling */
 .quiz-box h2 {
-    font-size: 1.3rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
     color: #e0e0e0;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 600;
-    min-height: 60px;
+    min-height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,8 +36,8 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding: 0.8rem 1rem;
-    margin: 8px 0;
+    padding: 0.6rem 0.8rem;
+    margin: 6px 0;
     background-color: #3a2a56;
     border-radius: 8px;
     cursor: pointer;
@@ -49,16 +49,25 @@
     transform: translateY(-2px);
 }
 
-/* Option Label */
+/* Option Label and Radio Button Alignment */
 .option-box label {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     color: #f5f5f5;
     margin-left: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.option-box input[type="radio"] {
+    margin-right: 8px;
+    cursor: pointer;
+    transform: scale(1.2);
 }
 
 /* Buttons Styling */
 .buttons {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     display: flex;
     justify-content: space-between;
     gap: 10px;
@@ -67,12 +76,12 @@
 /* General Button Style */
 .buttons button {
     flex: 1;
-    padding: 10px 0;
+    padding: 8px 0;
     background-color: #6a4c9c;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     color: white;
-    font-size: 1rem;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     font-weight: 500;
@@ -83,47 +92,54 @@
     transform: translateY(-2px);
 }
 
-/* Result Section */
+/* Result Section - Compact but wide */
 .result {
-    margin-top: 4rem;
-    padding: 2rem;
+    padding: 1.5rem;
     background-color: #2a1c44;
     border-radius: 12px;
     box-shadow: 0 8px 30px rgba(255, 255, 255, 0.08);
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 380px;
-    min-height: 360px;
-    margin: 4rem auto;
+    width: 65%;
+    max-width: 650px;
+    min-height: 300px;
+    margin: 2rem auto;
     transition: all 0.4s ease;
 }
 
 /* Result Title */
 .result h3 {
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
     color: #e0e0e0;
     font-weight: 600;
 }
 
+.result h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #d0d0d0;
+}
+
 /* Result Content */
 .result p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #f5f5f5;
-    line-height: 1.6;
+    line-height: 1.5;
     font-weight: 400;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     text-align: center;
 }
 
-/* Zodiac Combo */
+/* Zodiac Combo - Compact but clear */
 .zodiac-combo {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
-    margin-top: 20px;
+    gap: 25px;
+    margin-top: 10px;
+    width: 100%;
 }
 
 .zodiac {
@@ -131,12 +147,12 @@
 }
 
 .zodiac img {
-    width: 90px;
-    height: 90px;
+    width: 80px;
+    height: 80px;
     object-fit: cover;
     border: 2px solid #6a4c9c;
-    border-radius: 10px;
-    margin-bottom: 8px;
+    border-radius: 8px;
+    margin-bottom: 6px;
     transition: transform 0.3s ease;
 }
 
@@ -147,35 +163,22 @@
 .zodiac h5 {
     color: #dcdde1;
     font-size: 1rem;
+    margin-top: 3px;
 }
 
-/* Retake Quiz Button */
-.result .buttons button.retake-quiz {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    background-color: #8e44ad;
-    border-radius: 10px;
-    font-size: 1.1rem;
-    margin-top: 1.5rem;
-    font-weight: 600;
-}
-
-.result .buttons button.retake-quiz:hover {
-    background-color: #7f3c7d;
-}
-
-/* Hide Back and Reveal Buttons */
-.result .buttons button.reveal-analysis,
-.result .buttons button.back {
-    display: none;
+/* Plus sign between zodiacs */
+.zodiac-combo span {
+    font-size: 1.6rem;
+    color: #8e44ad;
+    font-weight: bold;
 }
 
 /* Quiz Title */
 .quiz-title {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     text-align: center;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
     font-weight: bold;
     color: #ffffff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -189,45 +192,54 @@
     cursor: pointer;
 }
 
-/* Analysis Section */
+/* Analysis Section - Compact but readable */
 .analysis-text {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background-color: plum;
-    padding: 20px;
-    margin: 40px auto;
-    border-radius: 14px;
+    padding: 18px;
+    margin: 20px auto 15px;
+    border-radius: 12px;
     width: 90%;
-    max-width: 420px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
     color: #444;
 }
 
+/* Analysis Content */
 .analysis-text p {
     margin: 0;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    color: #2a1c44;
 }
 
 .analysis-text span {
     display: block;
-    margin-top: 6px;
+    margin: 10px 0;
     font-size: 1rem;
     font-weight: 400;
-    color: #666;
-    line-height: 1.6;
+    color: #333;
+    line-height: 1.5;
+}
+
+/* Choices text - smaller font for traits list */
+.choices-text {
+    font-size: 0.8rem !important;
+    color: #555 !important;
+    margin-top: 10px !important;
+    font-style: italic;
 }
 
 /* Analysis Button */
 .analysis-text button {
-    margin-top: 18px;
-    background-color: #6c63ff;
+    margin-top: 15px;
+    background-color: #381351;
     color: white;
     border: none;
-    padding: 10px 24px;
-    font-size: 1rem;
-    border-radius: 10px;
+    padding: 10px 22px;
+    font-size: 0.95rem;
+    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
     font-weight: 600;
@@ -236,4 +248,61 @@
 .analysis-text button:hover {
     background-color: #5a52d4;
     transform: translateY(-2px);
+}
+
+/* Date input styling */
+input[type="date"] {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #3a2a56;
+    background-color: #2e1a47;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    width: 80%;
+}
+
+/* Final question */
+.final-question {
+    margin: 15px 0;
+}
+
+.final-question h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #e0e0e0;
+}
+
+.final-question button {
+    padding: 10px 20px;
+    background-color: #8e44ad;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.final-question button:hover {
+    background-color: #9b59b6;
+    transform: translateY(-2px);
+}
+
+/* Media queries for responsiveness */
+@media screen and (max-width: 768px) {
+    .result {
+        width: 85%;
+        padding: 1.2rem;
+    }
+    
+    .zodiac-combo {
+        gap: 15px;
+    }
+    
+    .zodiac img {
+        width: 70px;
+        height: 70px;
+    }
 }
